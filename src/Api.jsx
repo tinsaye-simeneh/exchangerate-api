@@ -36,73 +36,101 @@ const Api = () => {
   };
 
   return (
-    <Container className="p-3 bg-dark border rounded my-5">
-      <Row>
-        <h1 className="text-center text-white">Currency Converter</h1>
-      </Row>
-      <Row className="my-5">
-        <Col className="col-md-8 mx-auto col-12">
-          <Row className="mt-4 mx-auto text-center">
-            <Col className="col-md-6 col-12  mx-auto text-center">
-              <Form.Group>
-                <Form.Label className="text-white"> From: </Form.Label>
-                <Form.Select
-                  value={from}
-                  onChange={(e) => setFrom(e.target.value)}
-                >
-                  {currencySymbols.map((symbols) => (
-                    <option value={symbols.abbreviation} key={symbols.id}>
-                      {symbols.abbreviation} - {""}
-                        {symbols.currency} - {""} ({getSymbolFromCurrency(symbols.abbreviation)})
-                    </option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-            </Col>
-          </Row>
-          <Row className="mt-4  mx-auto text-center">
-            <Col className="col-md-6 col-12  mx-auto text-center">
-              <Form.Group>
-                <Form.Label className="text-white"> To: </Form.Label>
-                <Form.Select value={to} onChange={(e) => setTo(e.target.value)}>
-                  {currencySymbols.map((symbols) => (
-                    <>
+    <>
+      <Container className="p-3 bg-dark border rounded my-5">
+        <Row>
+          <h1 className="text-center text-white">Currency Converter</h1>
+        </Row>
+        <Row className="my-5">
+          <Col className="col-md-8 mx-auto col-12">
+            <Row className="mt-4 mx-auto text-center">
+              <Col className="col-md-6 col-12  mx-auto text-center">
+                <Form.Group>
+                  <Form.Label className="text-white"> From: </Form.Label>
+                  <Form.Select
+                    value={from}
+                    onChange={(e) => setFrom(e.target.value)}
+                  >
+                    {currencySymbols.map((symbols) => (
                       <option value={symbols.abbreviation} key={symbols.id}>
                         {symbols.abbreviation} - {""}
-                        {symbols.currency} - {""} ({getSymbolFromCurrency(symbols.abbreviation)})
+                        {symbols.currency} - {""} (
+                        {getSymbolFromCurrency(symbols.abbreviation)})
                       </option>
-                    </>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-            </Col>
-          </Row>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="mt-4  mx-auto text-center">
+              <Col className="col-md-6 col-12  mx-auto text-center">
+                <Form.Group>
+                  <Form.Label className="text-white"> To: </Form.Label>
+                  <Form.Select
+                    value={to}
+                    onChange={(e) => setTo(e.target.value)}
+                  >
+                    {currencySymbols.map((symbols) => (
+                      <>
+                        <option value={symbols.abbreviation} key={symbols.id}>
+                          {symbols.abbreviation} - {""}
+                          {symbols.currency} - {""} (
+                          {getSymbolFromCurrency(symbols.abbreviation)})
+                        </option>
+                      </>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+              </Col>
+            </Row>
 
-          <Row className="mt-4  mx-auto text-center">
-            <Col className="col-md-6 col-12  mx-auto text-center">
-              <Form.Group>
-                <Form.Label className="text-white"> Amount: </Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="Enter Amount"
-                  value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-        </Col>
+            <Row className="mt-4  mx-auto text-center">
+              <Col className="col-md-6 col-12  mx-auto text-center">
+                <Form.Group>
+                  <Form.Label className="text-white"> Amount: </Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter Amount"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+          </Col>
 
-        <Col className="col-12 col-md-4 mt-5 text-center text-white">
-          <p> Rate: {data.result} </p>
-          <p> Date: {data.date} </p>
-          <p>
-            {" "}
-            Result: {(amount * data.result).toFixed(4)} {to}
-          </p>
+          <Col className="col-12 col-md-4 mt-5 text-center text-white">
+            <p> Rate: {data.result} </p>
+            <p> Date: {data.date} </p>
+            <p>
+              {" "}
+              Result: {(amount * data.result).toFixed(4)} {to}
+            </p>
+          </Col>
+        </Row>
+      </Container>
+
+      <Row className="mt-4  mx-auto text-center">
+        <Col className="col-md-6 col-12  mx-auto text-center">
+          Developed By:{" "}
+          <a
+            href="https://github.com/tinsaye-simeneh"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Tinsaye Simeneh
+          </a>{" "}
+          Using{" "}
+          <a
+            href="https://exchangerate.host/#/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            ExchangeRate API
+          </a>
         </Col>
       </Row>
-    </Container>
+    </>
   );
 };
 
