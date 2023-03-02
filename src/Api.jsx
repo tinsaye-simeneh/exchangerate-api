@@ -6,7 +6,7 @@ import getSymbolFromCurrency from "currency-symbol-map";
 
 const Api = () => {
   const [data, setData] = useState([]);
-  const [from, setFrom] = useState("");
+  const [from, setFrom] = useState("USD");
   const [to, setTo] = useState("EUR");
   const [amount, setAmount] = useState(1);
   const [result, setResult] = useState(0);
