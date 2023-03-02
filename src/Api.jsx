@@ -1,27 +1,32 @@
-import React, { useEffect }  from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const get = () => {
-    axios.get("https://api.exchangerate.host/latest")
-        .then((response) => {
-            console.log(response);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-};
-
 const Api = () => {
+  const [data, setData] = useState([]);
 
-    useEffect(() => {
-        get();
-    }, []);
+  const get = () => {
+    axios
+      .get("https://api.exchangerate.host/convert?from=USD&to=EUR&amount=1")
+      .then((response) => {
+        console.log(response);
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-    return (
-        <div>
-            <h1>API</h1>
-        </div>
-    );
-    }
+  useEffect(() => {
+    get();
+  }, []);
+
+  return (
+    <div>
+      <h1>
+        {data.rate} {data.result}
+      </h1>
+    </div>
+  );
+};
 
 export default Api;
