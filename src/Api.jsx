@@ -93,7 +93,7 @@ const Api = () => {
           <p> Date: {data.date} </p>
           <p>
             {" "}
-            Result: {(amount * data.result).toFixed(2)} {to}
+            Result: {(amount * data.result).toFixed(4)} {to}
           </p>
         </Col>
       </Row>
