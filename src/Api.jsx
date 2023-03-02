@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Container, Row, Label } from "react-bootstrap";
+import { Container, Row, Form, Col } from "react-bootstrap";
 
 const Api = () => {
   const [data, setData] = useState([]);
@@ -19,13 +19,29 @@ const Api = () => {
 
   return (
     <Container className="p-3 bg-primary">
-        <Row className="bg-danger">
+      <Row className="bg-danger">
         <h1 className="text-center">Exchange Rate</h1>
-        </Row>
-        <label className="text-center">From</label>
+      </Row>
+      <Row>
+        <Col className="bg-warning">
+      <Form.Group className="mb-3">
+        <Form.Label> From: </Form.Label>
+        <Form.Select>
+          <option>USD Dollar (USD)</option>
+        </Form.Select>
+      </Form.Group>
+        </Col>
+        <Col className="bg-warning">
+        <Form.Group className="mb-3">
+        <Form.Label> To: </Form.Label>
+        <Form.Select>
+            <option>EUR Euro (EUR)</option>
+        </Form.Select>
+        </Form.Group>
+        </Col>
 
+      </Row>
     </Container>
-
   );
 };
 
