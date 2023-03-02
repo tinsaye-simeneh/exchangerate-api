@@ -52,7 +52,8 @@ const Api = () => {
                 >
                   {currencySymbols.map((symbols) => (
                     <option value={symbols.abbreviation} key={symbols.id}>
-                      {symbols.abbreviation}
+                      {symbols.abbreviation} - {""}
+                        {symbols.currency} - {""} ({getSymbolFromCurrency(symbols.abbreviation)})
                     </option>
                   ))}
                 </Form.Select>
@@ -67,8 +68,8 @@ const Api = () => {
                   {currencySymbols.map((symbols) => (
                     <>
                       <option value={symbols.abbreviation} key={symbols.id}>
-                        {getSymbolFromCurrency(symbols.abbreviation)}
-                        {symbols.abbreviation}
+                        {symbols.abbreviation} - {""}
+                        {symbols.currency} - {""} ({getSymbolFromCurrency(symbols.abbreviation)})
                       </option>
                     </>
                   ))}
