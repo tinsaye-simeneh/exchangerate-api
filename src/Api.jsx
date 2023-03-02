@@ -6,6 +6,22 @@ const Api = () => {
   const [data, setData] = useState([]);
   const [from, setFrom] = useState("USD");
   const [to, setTo] = useState("EUR");
+  const [amount, setAmount] = useState(1);
+  const [result, setResult] = useState(0);
+
+  useEffect(() => {
+    axios
+      .get(`https://api.exchangerate.host/convert?from=${from}&to=${to}`)
+      .then((res) => {
+        console.log(res.data);
+        setData(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [from, to]);
+
+  if (amount < 1) {
+    setAmount(1);
+  }
 
   const get = () => {
     axios
@@ -18,28 +34,59 @@ const Api = () => {
   };
 
   return (
-    <Container className="p-3 bg-primary">
-      <Row className="bg-danger">
-        <h1 className="text-center">Exchange Rate</h1>
-      </Row>
+    <Container className="p-3 bg-dark border round my-5">
       <Row>
-        <Col className="bg-warning">
-      <Form.Group className="mb-3">
-        <Form.Label> From: </Form.Label>
-        <Form.Select>
-          <option>USD Dollar (USD)</option>
-        </Form.Select>
-      </Form.Group>
-        </Col>
-        <Col className="bg-warning">
-        <Form.Group className="mb-3">
-        <Form.Label> To: </Form.Label>
-        <Form.Select>
-            <option>EUR Euro (EUR)</option>
-        </Form.Select>
-        </Form.Group>
+        <h1 className="text-center text-white">Currency Converter</h1>
+      </Row>
+      <Row className="my-5">
+        <Col className="col-md-8 mx-auto col-12">
+          <Row className="mt-4 mx-auto text-center">
+            <Col className="col-md-6 col-12  mx-auto text-center">
+              <Form.Group>
+                <Form.Label className="text-white"> From: </Form.Label>
+                <Form.Select
+                  value={from}
+                  onChange={(e) => setFrom(e.target.value)}
+                >
+                  <option value="USD">USD</option>
+                </Form.Select>
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row className="mt-4  mx-auto text-center">
+            <Col className="col-md-6 col-12  mx-auto text-center">
+              <Form.Group>
+                <Form.Label className="text-white"> To: </Form.Label>
+                <Form.Select value={to} onChange={(e) => setTo(e.target.value)}>
+                  <option value="EUR">EUR</option>
+                </Form.Select>
+              </Form.Group>
+            </Col>
+          </Row>
+
+          <Row className="mt-4  mx-auto text-center">
+            <Col className="col-md-6 col-12  mx-auto text-center">
+              <Form.Group>
+                <Form.Label className="text-white"> Amount: </Form.Label>
+                <Form.Control
+                  type="number"
+                  placeholder="Enter Amount"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
         </Col>
 
+        <Col className="col-12 col-md-4 mt-5 text-center text-white">
+          <p> Rate: {data.result} </p>
+          <p> Date: {data.date} </p>
+          <p>
+            {" "}
+            Result: {amount * data.result} {to}
+          </p>
+        </Col>
       </Row>
     </Container>
   );
