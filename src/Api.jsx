@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Container, Row, Form, Col } from "react-bootstrap";
+import currencySymbols from "./currencySymbols.json";
 
 const Api = () => {
   const [data, setData] = useState([]);
-  const [from, setFrom] = useState("USD");
+  const [from, setFrom] = useState("");
   const [to, setTo] = useState("EUR");
   const [amount, setAmount] = useState(1);
   const [result, setResult] = useState(0);
@@ -34,7 +35,7 @@ const Api = () => {
   };
 
   return (
-    <Container className="p-3 bg-dark border round my-5">
+    <Container className="p-3 bg-dark border rounded my-5">
       <Row>
         <h1 className="text-center text-white">Currency Converter</h1>
       </Row>
@@ -48,7 +49,11 @@ const Api = () => {
                   value={from}
                   onChange={(e) => setFrom(e.target.value)}
                 >
-                  <option value="USD">USD</option>
+                  {currencySymbols.map((symbols) => (
+                    <option value={symbols.abbreviation} key={symbols.id}>
+                        {symbols.abbreviation}
+                    </option>
+                  ))}
                 </Form.Select>
               </Form.Group>
             </Col>
@@ -58,7 +63,11 @@ const Api = () => {
               <Form.Group>
                 <Form.Label className="text-white"> To: </Form.Label>
                 <Form.Select value={to} onChange={(e) => setTo(e.target.value)}>
-                  <option value="EUR">EUR</option>
+                {currencySymbols.map((symbols) => (
+                    <option value={symbols.abbreviation} key={symbols.id}>
+                        {symbols.abbreviation}
+                    </option>
+                  ))}
                 </Form.Select>
               </Form.Group>
             </Col>
